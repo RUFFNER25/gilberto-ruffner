@@ -1,0 +1,46 @@
+@startuml = startuml
+
+class Usuarios {
+    + id: int (PK)
+    + nombre: string
+    + edad: integer
+}
+
+class Libros {
+    + id: int (PK)
+    + titulo: string
+    + id_autor: int (FK)
+    + id_usuario: int (FK)
+}
+
+class Reseña {
+    + id: int (PK)
+    + id_usuario: int (FK)
+    + id_libro: int (FK)
+    + descripcion: string
+}
+
+class Autores {
+    + id: int (PK)
+    + nombre: string
+    + edad: int
+}
+
+class Categorías {
+    + id: int (PK)
+    + nombre: string
+}
+
+class Libros_Categorías {
+    + id_libro: int (PK, FK)
+    + id_categoria: int (PK, FK)
+}
+
+Usuarios "1" -- "n" Reseña : escribe
+Usuarios "1" -- "n" Libros : reserva
+Libros "n" -- "1" Autores : pertenece_a
+Libros "1" -- "n" Reseña : tiene
+Libros_Categorías "n" -- "1" Categorías : incluye
+Libros_Categorías "n" -- "1" Libros : pertenece_a
+
+@enduml
